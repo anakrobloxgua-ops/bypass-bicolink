@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#c7ff5e">
+<title>NeoTools — Web Toolkit</title>
+<style>
+:root {
+  --bg: #f5f0e8;
+  --ink: #171717;
+  --lime: #c7ff5e;
+  --purple: #c5a6ff;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Arial, sans-serif;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 3px solid var(--ink);
+}
+.logo { font-size: 21px; font-weight: 900; }
+.tag {
+  border: 2px solid var(--ink);
+  padding: 7px 10px;
+  font-size: 11px;
+  font-weight: 900;
+  background: var(--lime);
+}
+main {
+  width: min(900px, 100%);
+  padding: 24px 18px 60px;
+  margin: auto;
+}
+.hero {
+  background: var(--lime);
+  border: 3px solid var(--ink);
+  box-shadow: 7px 7px 0 var(--ink);
+  padding: 28px 22px;
+  margin: 12px 0 28px;
+}
+h1 {
+  font-size: clamp(36px, 9vw, 68px);
+  line-height: .95;
+  letter-spacing: -3px;
+  margin: 16px 0;
+}
+p { line-height: 1.6; }
+.card {
+  background: white;
+  border: 3px solid var(--ink);
+  box-shadow: 5px 5px 0 var(--ink);
+  padding: 20px;
+  margin-bottom: 24px;
+}
+.label {
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+input {
+  width: 100%;
+  padding: 14px;
+  border: 3px solid var(--ink);
+  border-radius: 0;
+  font-size: 15px;
+  margin: 12px 0;
+}
+button {
+  width: 100%;
+  padding: 14px;
+  background: var(--purple);
+  border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  font-size: 14px;
+  font-weight: 900;
+  cursor: pointer;
+}
+button:active {
+  transform: translate(3px,3px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+.note {
+  padding: 14px;
+  background: #fff3c4;
+  border: 2px solid var(--ink);
+  font-size: 13px;
+}
+footer {
+  text-align: center;
+  border-top: 3px solid var(--ink);
+  padding: 24px;
+  font-size: 12px;
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">✳ NEOTOOLS</div>
+  <div class="tag">WEB TOOLKIT V1</div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="label">YOUR DIGITAL WORKSPACE</div>
+    <h1>TOOLS.<br>MADE SIMPLE.</h1>
+    <p>Tempat tools digital yang praktis, cepat, dan mudah digunakan.</p>
+  </section>
+
+  <section class="card">
+    <div class="label">01 / URL TOOL</div>
+    <h2>URL Inspector</h2>
+    <p>Periksa format dan domain sebuah URL sebelum membukanya.</p>
+    <input id="url" type="url"
+      placeholder="https://example.com"
+      autocomplete="url">
+    <button id="check">PERIKSA URL ↗</button>
+    <p id="result" aria-live="polite"></p>
+  </section>
+
+  <section class="note">
+    <b>SAFETY FIRST</b>
+    <p>Periksa domain dengan teliti. Hindari memasukkan kata sandi,
+    kode OTP, atau informasi pribadi ke situs yang tidak dikenal.</p>
+  </section>
+</main>
+
+<footer>NEOTOOLS © 2026 — BUILT FOR THE WEB.</footer>
+
+<script>
+const input = document.getElementById("url");
+const result = document.getElementById("result");
+
+document.getElementById("check").addEventListener("click", () => {
+  try {
+    const url = new URL(input.value.trim());
+
+    if (!["http:", "https:"].includes(url.protocol)) {
+      throw new Error("Protokol tidak didukung.");
+    }
+
+    result.textContent =
+      "Domain: " + url.hostname +
+      " | Protokol: " + url.protocol +
+      " | Format URL valid.";
+  } catch {
+    result.textContent = "URL tidak valid. Masukkan URL lengkap.";
+  }
+});
+</script>
+</body>
+</html>
